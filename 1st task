@@ -1,0 +1,59 @@
+XML
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spel="http://speller.yandex.net/services/spellservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <spel:CheckTextRequest lang="ru" options="0" format="">
+         <spel:text>Жыл был дед и незнал дед что бизграмотен он</spel:text>
+      </spel:CheckTextRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+Raw
+
+POST http://speller.yandex.net/services/spellservice HTTP/1.1
+Accept-Encoding: gzip,deflate
+Content-Type: text/xml;charset=UTF-8
+SOAPAction: "http://speller.yandex.net/services/spellservice/checkText"
+Content-Length: 426
+Host: speller.yandex.net
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+XML
+
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <CheckTextResponse xmlns="http://speller.yandex.net/services/spellservice">
+         <SpellResult>
+            <error code="1" pos="0" row="0" col="0" len="3">
+               <word>Жыл</word>
+               <s>Жил</s>
+            </error>
+            <error code="1" pos="14" row="0" col="14" len="6">
+               <word>незнал</word>
+               <s>не знал</s>
+            </error>
+            <error code="1" pos="29" row="0" col="29" len="11">
+               <word>бизграмотен</word>
+               <s>безграмотен</s>
+            </error>
+         </SpellResult>
+      </CheckTextResponse>
+   </soap:Body>
+</soap:Envelope>
+
+Raw
+
+HTTP/1.1 200 OK
+Server: nginx/1.6.2
+Date: Wed, 17 Jul 2019 15:05:31 GMT
+Content-Type: text/xml; charset=utf-8
+Content-Length: 683
+Connection: keep-alive
+Keep-Alive: timeout=120
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><CheckTextResponse xmlns="http://speller.yandex.net/services/spellservice"><SpellResult><error code="1" pos="0" row="0" col="0" len="3"><word>Р–С‹Р»</word><s>Р–РёР»</s></error><error code="1" pos="14" row="0" col="14" len="6"><word>РЅРµР·РЅР°Р»</word><s>РЅРµ Р·РЅР°Р»</s></error><error code="1" pos="29" row="0" col="29" len="11"><word>Р±РёР·РіСЂР°РјРѕС‚РµРЅ</word><s>Р±РµР·РіСЂР°РјРѕС‚РµРЅ</s></error></SpellResult></CheckTextResponse></soap:Body></soap:Envelope>
